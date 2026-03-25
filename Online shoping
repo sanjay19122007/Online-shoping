@@ -1,0 +1,71 @@
+# Online Shopping System
+
+# Product list (name: price)
+products = {
+    "Shirt": 500,
+    "Jeans": 1200,
+    "Shoes": 2000,
+    "Watch": 1500,
+    "Bag": 800
+}
+
+cart = {}
+
+def show_products():
+    print("\nAvailable Products:")
+    for item, price in products.items():
+        print(f"{item} - ₹{price}")
+
+def add_to_cart():
+    item = input("\nEnter product name: ")
+    if item in products:
+        quantity = int(input("Enter quantity: "))
+        if item in cart:
+            cart[item] += quantity
+        else:
+            cart[item] = quantity
+        print(f"{item} added to cart!")
+    else:
+        print("Product not found!")
+
+def view_cart():
+    print("\nYour Cart:")
+    total = 0
+    for item, quantity in cart.items():
+        price = products[item] * quantity
+        total += price
+        print(f"{item} x {quantity} = ₹{price}")
+    print(f"Total Amount = ₹{total}")
+
+def checkout():
+    if not cart:
+        print("\nCart is empty!")
+        return
+    view_cart()
+    print("\nThank you for shopping!")
+    cart.clear()
+
+# Main Menu
+while True:
+    print("\n--- Online Shopping Menu ---")
+    print("1. Show Products")
+    print("2. Add to Cart")
+    print("3. View Cart")
+    print("4. Checkout")
+    print("5. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        show_products()
+    elif choice == "2":
+        add_to_cart()
+    elif choice == "3":
+        view_cart()
+    elif choice == "4":
+        checkout()
+    elif choice == "5":
+        print("Exiting... Thank you!")
+        break
+    else:
+        print("Invalid choice! Try again.")
